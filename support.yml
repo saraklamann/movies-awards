@@ -1,0 +1,11 @@
+# Run application:
+
+--- npm run start || ng serve
+
+# Generate component:
+
+--- ng generate component name || ng g c name
+
+# Generate service:
+
+--- ng generate service name || ng g s name
