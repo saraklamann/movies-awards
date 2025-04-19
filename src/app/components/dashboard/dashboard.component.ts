@@ -3,10 +3,11 @@ import { MultipleWinnersTableComponent } from './tables/multiple-winners-table/m
 import { TopStudiosTableComponent } from './tables/top-studios-table/top-studios-table.component';
 import { MaxIntervalTableComponent } from './tables/max-interval-table/max-interval-table.component';
 import { MinIntervalTableComponent } from './tables/min-interval-table/min-interval-table.component';
+import { WinnersByYearTableComponent } from './tables/winners-by-year-table/winners-by-year-table.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MultipleWinnersTableComponent, TopStudiosTableComponent, MaxIntervalTableComponent, MinIntervalTableComponent],
+  imports: [MultipleWinnersTableComponent, TopStudiosTableComponent, MaxIntervalTableComponent, MinIntervalTableComponent, WinnersByYearTableComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
