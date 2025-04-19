@@ -1,12 +1,29 @@
 <div class="flex flex-col md:flex-row gap-8 px-6 py-6">
     <div class="w-full md:w-1/2 flex flex-col gap-6">
-      <app-multiple-winners-table />
-      <app-multiple-winners-table />
+      <div class="bg-white rounded-xl shadow-lg p-4">
+        <p class="font-semibold mb-2">List years with multiple winners</p>
+        <app-multiple-winners-table />
+      </div>
+  
+      <div class="bg-white rounded-xl shadow-lg p-4">
+        <p class="font-semibold">Producers with longest and shortest interval between wins</p>
+        <p class="font-semibold mb-2">Maximum</p>
+        <app-max-interval-table />
+        <p class="font-semibold mb-2 mt-5">Minimum</p>
+        <app-min-interval-table />
+      </div>
     </div>
   
     <div class="w-full md:w-1/2 flex flex-col gap-6">
-      <app-top-studios-table />
-      <app-multiple-winners-table />
+      <div class="bg-white rounded-xl shadow-lg p-4">
+        <p class="font-semibold mb-2">Top 3 studios with winners</p>
+        <app-top-studios-table />
+      </div>
+  
+      <div class="bg-white rounded-xl shadow-lg p-4">
+        <p class="font-semibold mb-2">List movie winners by year</p>
+        <app-multiple-winners-table />
+      </div>
     </div>
   </div>
   
