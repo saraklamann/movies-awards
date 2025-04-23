@@ -7,10 +7,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="text-center">
-          <td class="px-4 py-2 border-b border-gray-300"> year </td>
-          <td class="px-4 py-2 border-b border-gray-300"> win_count </td>
-        </tr>
+        @for (row of multipleWinners; track row.year) {
+          <tr class="text-center">
+            <td class="px-4 py-2 border-b border-gray-300"> {{ row.year }} </td>
+            <td class="px-4 py-2 border-b border-gray-300"> {{ row.winnerCount }} </td>
+          </tr>
+        }
       </tbody>
     </table>
 </div>

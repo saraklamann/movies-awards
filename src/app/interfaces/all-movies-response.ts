@@ -1,6 +1,6 @@
 import { Movie } from "./movie";
 
-export interface MovieResponse {
+export interface AllMoviesResponse {
     _embedded: {
         movies: Movie[];
         };
