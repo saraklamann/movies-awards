@@ -8,13 +8,20 @@
           <th class="px-4 py-3">Winner</th>
         </tr>
       </thead>
-      <tbody class="text-center">
-        <tr>
-          <td class="px-4 py-2 border-b border-gray-300"> id </td>
-          <td class="px-4 py-2 border-b border-gray-300"> movie.year </td>
-          <td class="px-4 py-2 border-b border-gray-300"> movie.title </td>
-          <td class="px-4 py-2 border-b border-gray-300"> ✔ </td>
-        </tr>
+      <tbody class="text-center bg-white">
+        @for (movie of movies; track movie.id) {
+          <tr>
+            <td class="px-4 py-2 border-b border-gray-300"> {{movie.id}} </td>
+            <td class="px-4 py-2 border-b border-gray-300"> {{movie.year}} </td>
+            <td class="px-4 py-2 border-b border-gray-300"> {{movie.title}} </td>
+            <td class="px-4 py-2 border-b border-gray-300"> {{ movie.winner ? '✔' : '-' }} </td>
+          </tr>
+        }
       </tbody>
     </table>
+    <div class="mt-6 flex justify-center items-center gap-2">
+      <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 0" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">Previous</button>
+      <span class="text-sm text-gray-600"> {{ currentPage + 1 }} of {{ totalPages }} </span>
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage + 1 >= totalPages" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">Next</button>
+    </div>
 </div>

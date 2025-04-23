@@ -1,0 +1,9 @@
+{
+    "/api/movies": {
+      "target": "https://challenge.outsera.tech",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/api/movies": "/movies" },
+      "logLevel": "debug"
+    }
+}
