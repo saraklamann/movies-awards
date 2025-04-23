@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable, switchMap } from 'rxjs';
 import { Movie } from '../interfaces/movie';
 import { AllMoviesResponse } from '../interfaces/all-movies-response';
-import { MultipleWinnersResponse } from '../interfaces/multiple-winners-response';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +52,44 @@ export class MoviesApiService {
             year: +year,
             winnerCount: count,
           }));
+      })
+    );
+  }
+
+  getTop3Studios(): Observable<{ studio: string; wins: number }[]> {
+    return this._http.get<{ _embedded: { movies: Movie[] }; page: { totalPages: number } }>('/api/movies').pipe(
+      switchMap((firstPage) => {
+        const requests = [];
+        for (let i = 2; i <= firstPage.page.totalPages; i++) {
+          requests.push(
+            this._http.get<{ _embedded: { movies: Movie[] } }>(`/api/movies?page=${i}`)
+          );
+        }
+
+        return forkJoin([this._http.get<{ _embedded: { movies: Movie[] } }>('/api/movies'), ...requests]);
+      }),
+  
+      map((responses) => {
+        const allMovies: Movie[] = [];
+        responses.forEach((response) => {
+          allMovies.push(...response._embedded.movies);
+        });
+
+        const studioWins: { [studio: string]: number } = {};
+        allMovies.forEach((movie) => {
+          if (movie.winner) {
+            movie.studios.forEach((studio) => {
+              studioWins[studio] = (studioWins[studio] || 0) + 1;
+            });
+          }
+        });
+
+        const topStudios = Object.entries(studioWins)
+          .map(([studio, wins]) => ({ studio, wins }))
+          .sort((a, b) => b.wins - a.wins)
+          .slice(0, 3);
+
+        return topStudios;
       })
     );
   }
