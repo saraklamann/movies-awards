@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable, switchMap } from 'rxjs';
 import { Movie } from '../interfaces/movie';
 import { AllMoviesResponse } from '../interfaces/all-movies-response';
+import { ProducerInterval } from '../interfaces/producer-interval-response';
 
 @Injectable({
   providedIn: 'root',
@@ -93,5 +94,137 @@ export class MoviesApiService {
       })
     );
   }
+
+  getShortestInterval(): Observable<{ producer: string; interval: number; previousWin: number; followingWin: number }[]> {
+    return this._http.get<{ _embedded: { movies: Movie[] }; page: { totalPages: number } }>('/api/movies').pipe(
+      switchMap((firstPage) => {
+        const requests = [];
+        for (let i = 2; i <= firstPage.page.totalPages; i++) {
+          requests.push(
+            this._http.get<{ _embedded: { movies: Movie[] } }>(`/api/movies?page=${i}`)
+          );
+        }
+  
+        return forkJoin([this._http.get<{ _embedded: { movies: Movie[] } }>('/api/movies'), ...requests]);
+      }),
+  
+      map((responses) => {
+        const allMovies: Movie[] = [];
+        responses.forEach((response) => {
+          allMovies.push(...response._embedded.movies);
+        });
+  
+        const producerIntervals: { [producer: string]: { years: number[] } } = {};
+        allMovies.forEach((movie) => {
+          if (movie.winner) {
+            movie.producers.forEach((producer) => {
+              if (!producerIntervals[producer]) {
+                producerIntervals[producer] = { years: [] };
+              }
+              producerIntervals[producer].years.push(movie.year);
+            });
+          }
+        });
+  
+        const intervals = Object.entries(producerIntervals)
+          .map(([producer, data]) => {
+            const sortedYears = data.years.sort((a, b) => a - b);
+  
+            if (sortedYears.length > 1) {
+              let minInterval = Infinity;
+              let previousYear = -1;
+              let followingYear = -1;
+  
+              for (let i = 1; i < sortedYears.length; i++) {
+                const interval = sortedYears[i] - sortedYears[i - 1];
+                if (interval < minInterval) {
+                  minInterval = interval;
+                  previousYear = sortedYears[i - 1];
+                  followingYear = sortedYears[i];
+                }
+              }
+  
+              return { producer, interval: minInterval, previousWin: previousYear, followingWin: followingYear };
+            }
+  
+            return null;
+          })
+          .filter((interval) => interval !== null) 
+  
+          .sort((a, b) => a.interval - b.interval); 
+  
+        return intervals;
+      })
+    );
+  }
+  
+  getLongestInterval(): Observable<{ producer: string; interval: number; previousWin: number; followingWin: number }[]> {
+    return this._http.get<{ _embedded: { movies: Movie[] }; page: { totalPages: number } }>('/api/movies').pipe(
+      switchMap((firstPage) => {
+        const requests = [];
+        for (let i = 2; i <= firstPage.page.totalPages; i++) {
+          requests.push(
+            this._http.get<{ _embedded: { movies: Movie[] } }>(`/api/movies?page=${i}`)
+          );
+        }
+  
+        return forkJoin([this._http.get<{ _embedded: { movies: Movie[] } }>('/api/movies'), ...requests]);
+      }),
+  
+      map((responses) => {
+        const allMovies: Movie[] = [];
+        responses.forEach((response) => {
+          allMovies.push(...response._embedded.movies);
+        });
+  
+        const producerIntervals: { [producer: string]: { years: number[] } } = {};
+        allMovies.forEach((movie) => {
+          if (movie.winner) {
+            movie.producers.forEach((producer) => {
+              if (!producerIntervals[producer]) {
+                producerIntervals[producer] = { years: [] };
+              }
+              producerIntervals[producer].years.push(movie.year);
+            });
+          }
+        });
+  
+        const intervals = Object.entries(producerIntervals)
+          .map(([producer, data]) => {
+            const sortedYears = data.years.sort((a, b) => a - b);
+            
+            if (sortedYears.length > 1) {
+              let maxInterval = 0;
+              let previousYear = -1;
+              let followingYear = -1;
+  
+              for (let i = 1; i < sortedYears.length; i++) {
+                const interval = sortedYears[i] - sortedYears[i - 1];
+                if (interval > maxInterval) {
+                  maxInterval = interval;
+                  previousYear = sortedYears[i - 1];
+                  followingYear = sortedYears[i];
+                }
+              }
+  
+              return { producer, interval: maxInterval, previousWin: previousYear, followingWin: followingYear };
+            }
+  
+            const latestYear = sortedYears[0];
+            const oldestYear = Math.min(...sortedYears);
+            const interval = latestYear - oldestYear;
+            return {
+              producer,
+              interval,
+              previousWin: oldestYear,
+              followingWin: latestYear
+            };
+          })
+          .sort((a, b) => b.interval - a.interval);
+  
+        return intervals;
+      })
+    );
+  }  
 }
 
