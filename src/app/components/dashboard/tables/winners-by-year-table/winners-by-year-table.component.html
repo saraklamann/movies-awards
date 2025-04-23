@@ -1,10 +1,12 @@
 <div class="flex items-center gap-2 min-w-full justify-between my-4">
     <input
         type="number"
+        [(ngModel)]="yearInput"
         placeholder="Enter year"
         class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 w-full"
     />
         <button
+        (click)="onSearch()"
         class="bg-indigo-700 bg-opacity-30 font-semibold px-4 py-2 rounded-lg hover:bg-indigo-700 hover:bg-opacity-50 transition"
         >
         Search
@@ -12,6 +14,11 @@
 </div>
 
 <div class="overflow-x-auto w-full rounded">
+  @if (!yearInput) {
+    <div class="text-gray-600">Insira um ano</div>
+  } @else if (winners.length === 0) {
+    <div class="text-gray-600">Nenhum vencedor encontrado</div>
+  } @else {
     <table class="min-w-full table-auto">
       <thead class="bg-indigo-800 bg-opacity-20">
         <tr class="text-center">
@@ -21,11 +28,14 @@
         </tr>
       </thead>
       <tbody>
+        @for (winner of winners; track winner.id) {
         <tr class="text-center">
-          <td class="px-4 py-2 border-b border-gray-300"> id </td>
-          <td class="px-4 py-2 border-b border-gray-300"> year </td>
-          <td class="px-4 py-2 border-b border-gray-300"> movie_title </td>
+          <td class="px-4 py-2 border-b border-gray-300"> {{ winner.id }} </td>
+          <td class="px-4 py-2 border-b border-gray-300"> {{ winner.year }} </td>
+          <td class="px-4 py-2 border-b border-gray-300"> {{ winner.title }} </td>
         </tr>
+      }
       </tbody>
     </table>
+  }
 </div>

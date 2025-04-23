@@ -226,5 +226,35 @@ export class MoviesApiService {
       })
     );
   }  
+
+  getWinnersByYear(year: number): Observable<{ year: number; title: string; id: number }[]> {
+    return this._http.get<{ _embedded: { movies: Movie[] }; page: { totalPages: number } }>('/api/movies').pipe(
+      switchMap((firstPage) => {
+        const requests = [];
+        for (let i = 2; i <= firstPage.page.totalPages; i++) {
+          requests.push(
+            this._http.get<{ _embedded: { movies: Movie[] } }>(`/api/movies?page=${i}`)
+          );
+        }
+        return forkJoin([this._http.get<{ _embedded: { movies: Movie[] } }>('/api/movies'), ...requests]);
+      }),
+      map((responses) => {
+        const allMovies: Movie[] = [];
+        responses.forEach((response) => {
+          allMovies.push(...response._embedded.movies);
+        });
+
+        const winners = allMovies
+          .filter((movie) => movie.year === year && movie.winner)
+          .map((movie, index) => ({
+            year: movie.year,
+            title: movie.title,
+            id: index + 1
+          }));
+
+        return winners;
+      })
+    );
+  }
 }
 
