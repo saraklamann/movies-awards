@@ -7,6 +7,7 @@ import { WinnersByYearTableComponent } from './tables/winners-by-year-table/winn
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   imports: [MultipleWinnersTableComponent, TopStudiosTableComponent, MaxIntervalTableComponent, MinIntervalTableComponent, WinnersByYearTableComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

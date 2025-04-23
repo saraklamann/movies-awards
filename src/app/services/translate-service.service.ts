@@ -12,8 +12,6 @@ export class TranslateService {
     this.language = lang;
     const path = `assets/i18n/${lang}/${page}.json`;
     this.translations = await this.http.get(path).toPromise();
-    
-    console.log('Traduções carregadas:', this.translations); // Verifique o log aqui
   }
   
 

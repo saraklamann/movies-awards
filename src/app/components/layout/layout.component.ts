@@ -1,15 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { TranslateService } from '../../services/translate-service.service';
 import { Language } from '../../enums/language.enum';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
+
 export class LayoutComponent {
   translateService = inject(TranslateService);
   title = "";

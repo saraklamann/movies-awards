@@ -1,0 +1,18 @@
+<div class="p-6">
+    <h1 class="text-2xl font-semibold mb-4">All Movies</h1>
+
+    <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center mb-6 justify-end">
+      <div class="flex gap-2 w-full sm:w-auto">
+        <input type="number" id="year" placeholder="Enter year" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+        <button class="bg-indigo-700 bg-opacity-30 font-semibold px-4 py-2 rounded-lg hover:bg-indigo-700 hover:bg-opacity-50 transition">Search</button>
+      </div>
+    </div>
+
+    <app-all-movies/>
+
+    <div class="mt-6 flex justify-center items-center gap-2">
+      <button class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">Previous</button>
+      <span class="text-sm text-gray-600">Page 1 of 11</span>
+      <button class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">Next</button>
+    </div>
+</div>
