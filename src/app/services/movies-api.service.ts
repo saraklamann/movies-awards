@@ -2,8 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable, switchMap } from 'rxjs';
 import { Movie } from '../interfaces/movie';
-import { AllMoviesResponse } from '../interfaces/all-movies-response';
-import { ProducerInterval } from '../interfaces/producer-interval-response';
+import { AllMoviesResponse } from '../interfaces/movies-response';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +12,14 @@ export class MoviesApiService {
 
   getAllMovies(page: number = 0): Observable<{ movies: Movie[]; page: AllMoviesResponse['page'] }> {
     return this._http.get<AllMoviesResponse>(`/api/movies?page=${page}`).pipe(
-      map((res: AllMoviesResponse) => {
+      map((res) => {
         const movies = res._embedded.movies.map((movie, index) => ({
           ...movie,
           id: index + 1 + (res.page.size * res.page.number),
         }));
         return {
-          movies: movies,
-          page: res.page
+          movies,
+          page: res.page,
         };
       })
     );
@@ -253,6 +252,24 @@ export class MoviesApiService {
           }));
 
         return winners;
+      })
+    );
+  }
+
+  getFilteredMovies(year: number | null, winner: boolean | undefined, page: number = 0): Observable<{ movies: Movie[]; page?: any }> {
+    const url = `/api/filtered-movies?year=${year ?? ''}&winner=${winner}&page=${page}`;
+    console.log('URL da requisição filtrada:', url);
+  
+    return this._http.get<Movie[]>(url).pipe(
+      map((res: Movie[]) => {
+        const movies = res.map((movie, index) => ({
+          ...movie,
+          id: index + 1 + (page * 15), 
+        }));
+        return {
+          movies,
+          page: { number: page, totalPages: 1 }
+        };
       })
     );
   }

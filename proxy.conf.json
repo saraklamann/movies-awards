@@ -5,5 +5,12 @@
       "changeOrigin": true,
       "pathRewrite": { "^/api/movies": "/movies" },
       "logLevel": "debug"
+    },
+    "/api/filtered-movies": {
+      "target": "https://challenge.outsera.tech/api",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/api/filtered-movies": "/movies" },
+      "logLevel": "debug"
     }
 }

@@ -1,3 +1,31 @@
+<div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center mb-6 justify-end">
+  <div class="flex gap-2 sm:gap-4 items-center sm:items-center">
+    <label>
+      <input type="radio" [(ngModel)]="winnerFilter" name="winnerFilter" value="all" />
+      Todos
+    </label>
+    <label>
+      <input type="radio" [(ngModel)]="winnerFilter" name="winnerFilter" value="yes" />
+      Vencedores
+    </label>
+    <label>
+      <input type="radio" [(ngModel)]="winnerFilter" name="winnerFilter" value="no" />
+      Não Vencedores
+    </label>
+  </div>
+
+  <div class="flex gap-2 w-full sm:w-auto">
+    <input 
+      type="number" 
+      id="year" 
+      [(ngModel)]="yearInput"
+      placeholder="Enter year" 
+      class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+    />
+    <button class="bg-indigo-700 bg-opacity-30 font-semibold px-4 py-2 rounded-lg hover:bg-indigo-700 hover:bg-opacity-50 transition" (click)="search()">Search</button>
+  </div>
+</div>
+
 <div class="overflow-x-auto rounded">
     <table class="w-full text-sm text-left">
       <thead class="bg-indigo-800 bg-opacity-20">
