@@ -1,3 +1,8 @@
 {
-    "title": "Dashboard"
+    "multiple-winners-title": "Years with multiple winners",
+    "top-3-studios-title": "Top 3 producers with most victories",
+    "intervals_title": "Producers with longest and shortest interval between wins",
+    "longest-title": "Longest interval",
+    "shortest-title": "Shortest interval",
+    "movies-by-year-title": "Winners by year"
 }

@@ -1,0 +1,14 @@
+{
+    "id": "ID",
+    "year": "Year",
+    "title": "Title",
+    "winner": "Winner",
+    "year-placeholder": "Enter some year",
+    "all": "All",
+    "winners": "Winners",
+    "not-winners": "Not winners",
+    "search": "Search",
+    "previous": "Previous",
+    "next": "Next",
+    "all-movies": "All movies"
+}

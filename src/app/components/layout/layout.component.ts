@@ -19,7 +19,6 @@ export class LayoutComponent {
 
   async ngOnInit() {
     await this.translateService.use(Language.Portuguese, 'layout');
-    this.title = this.translateService.translate("title")
     this.dashboard_item = this.translateService.translate("dashboard-item")
     this.all_movies_item = this.translateService.translate("all-movies-item")
   }

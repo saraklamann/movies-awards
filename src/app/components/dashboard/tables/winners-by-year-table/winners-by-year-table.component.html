@@ -2,7 +2,7 @@
     <input
         type="number"
         [(ngModel)]="yearInput"
-        placeholder="Enter year"
+        placeholder={{year_placeholder}}
         class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 w-full"
     />
         <button
@@ -14,20 +14,15 @@
 </div>
 
 <div class="overflow-x-auto w-full rounded">
-  @if (!yearInput) {
-    <div class="text-gray-600 text-center">Insira um ano</div>
-  } @else if (winners.length === 0) {
-    <div class="text-gray-600 text-center">Nenhum vencedor encontrado {{yearInput}} </div>
-    <div class="text-gray-600 text-center">Dados retornados {{winners}} </div>
-  } @else {
-    <table class="min-w-full table-auto">
-      <thead class="bg-indigo-800 bg-opacity-20">
-        <tr class="text-center">
-          <th class="px-4 py-2"> id </th>
-          <th class="px-4 py-2"> year </th>
-          <th class="px-4 py-2"> movie_title </th>
-        </tr>
-      </thead>
+  <table class="min-w-full table-auto">
+    <thead class="bg-indigo-800 bg-opacity-20">
+      <tr class="text-center">
+        <th class="px-4 py-2"> {{id}} </th>
+        <th class="px-4 py-2"> {{year_label}} </th>
+        <th class="px-4 py-2"> {{title_label}} </th>
+      </tr>
+    </thead>
+  @if(winners.length !== 0 || yearInput) {
       <tbody>
         @for (winner of winners; track winner.id) {
         <tr class="text-center">
@@ -37,6 +32,6 @@
         </tr>
       }
       </tbody>
-    </table>
-  }
+    }
+  </table>
 </div>

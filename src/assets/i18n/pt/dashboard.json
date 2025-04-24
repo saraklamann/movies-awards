@@ -1,3 +1,8 @@
 {
-    "title": "Dashboard"
+    "multiple-winners-title": "Anos com multiplos ganhadores",
+    "top-3-studios-title": "Top 3 estudios com mais vitórias",
+    "intervals-title": "Estudios com o maior e o menor intervalo entre vitórias",
+    "longest-title": "Maior intervalo",
+    "shortest-title": "Menor intervalo",
+    "winners-by-year-title": "Ganhadores por ano"
 }

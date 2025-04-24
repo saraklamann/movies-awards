@@ -1,0 +1,14 @@
+{
+    "id": "ID",
+    "year": "Ano",
+    "title": "Título",
+    "winner": "Vencedor",
+    "year-placeholder": "Insira o ano",
+    "all": "Todos",
+    "winners": "Vencedores",
+    "not-winners": "Não vencedores",
+    "search": "Buscar",
+    "previous": "Anterior",
+    "next": "Próxima",
+    "all-movies": "Todos os filmes"
+}
