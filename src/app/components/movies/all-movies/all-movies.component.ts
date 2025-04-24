@@ -23,7 +23,6 @@ export class AllMoviesComponent implements OnInit {
   }
 
   search(): void {
-    console.log('Buscando com filtros:', this.yearInput, this.winnerFilter);
     this.loadMovies(0);
   }
 

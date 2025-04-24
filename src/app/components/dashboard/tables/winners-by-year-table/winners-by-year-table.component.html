@@ -6,7 +6,7 @@
         class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 w-full"
     />
         <button
-        (click)="onSearch()"
+        (click)="search()"
         class="bg-indigo-700 bg-opacity-30 font-semibold px-4 py-2 rounded-lg hover:bg-indigo-700 hover:bg-opacity-50 transition"
         >
         Search
@@ -17,7 +17,8 @@
   @if (!yearInput) {
     <div class="text-gray-600 text-center">Insira um ano</div>
   } @else if (winners.length === 0) {
-    <div class="text-gray-600 text-center">Nenhum vencedor encontrado</div>
+    <div class="text-gray-600 text-center">Nenhum vencedor encontrado {{yearInput}} </div>
+    <div class="text-gray-600 text-center">Dados retornados {{winners}} </div>
   } @else {
     <table class="min-w-full table-auto">
       <thead class="bg-indigo-800 bg-opacity-20">
