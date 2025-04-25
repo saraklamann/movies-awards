@@ -1,10 +1,49 @@
-# MoviesAwards
+# Movie Awards
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+This is a responsive Angular application that displays analytics and a paginated list of movies retrieved from a public API. The app also supports multi-language functionality with dynamic translations from JSON files.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Dashboard View**: Displays analytics such as:
+  - Years with multiple winners
+  - Studios with most wins
+  - Producers with longest/shortest intervals between wins
+  - Search for winners by year
+
+- **All Movies View**:
+  - Paginated table of movies (15 per page)
+  - Filters by year and winner status
+
+- 🌐 **i18n Translation System**:
+  - Custom-built translation service using JSON files
+  - Lazy loading of translation files per page
+
+- 📱 **Responsive Design**:
+  - Mobile-friendly (minimum resolution 768x1280)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js v18+
+- Angular CLI v17+
+
+### Installation
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/your-username/movies-awards.git
+cd movies-awards
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Start a local development server**
 
 ```bash
 ng serve
@@ -12,23 +51,7 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+3. **To build the project run:**
 
 ```bash
 ng build
@@ -36,24 +59,3 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
