@@ -2,20 +2,20 @@
 
 --- Dashboard page
 
-  * Multiple winners table
-  * Top 3 studios table
-  * Max and min win interval table
-  * Winners by year table
+  * Multiple winners table ✅
+  * Top 3 studios table ✅
+  * Max and min win interval table ✅
+  * Winners by year table ✅
 
 --- All movies page
 
-  * All movies table
-  * Filter by year
-  * Filter by is winner?
-  * Pagination
+  * All movies table ✅
+  * Filter by year ✅
+  * Filter by is winner? ✅
+  * Pagination ✅
 
 # Other requirements
 
---- Should have unit tests
---- Minimal responsivity 768x1280
---- Documentation
+--- Should have unit tests 
+--- Minimal responsivity 768x1280 ✅
+--- Documentation ✅

@@ -16,6 +16,7 @@ export class WinnersByYearTableComponent implements OnInit {
   year_placeholder = "";
   year_label = "";
   title_label = "";
+  search_label = "";
   yearInput: number | null = null; 
   winners: { year: number; title: string; id: number }[] = [];
 
@@ -27,6 +28,7 @@ export class WinnersByYearTableComponent implements OnInit {
       this.year_label = this.translateService.translate("year-label")
       this.year_placeholder = this.translateService.translate("year-placeholder")
       this.title_label = this.translateService.translate("title-label")
+      this.search_label = this.translateService.translate("search-label")
       
     this.loadMovies(0); 
   }
